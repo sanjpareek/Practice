@@ -7,18 +7,8 @@ import sun.awt.image.ImageWatched;
  */
 
 public class LinkedListOperations {
-
-    public class Node{
-        int data;
-        Node next;
-        Node(int value){
-            data = value;
-            next = null;
-        }
-    }
-
     private int size = 0;
-    private Node head;
+    public Node head;
     public LinkedListOperations(){
         head = null;
     }
@@ -73,31 +63,27 @@ public class LinkedListOperations {
         for(int i = 0; i < position-2; i++){
             temp = temp.next;
         }
-        if(temp.next == null){
 
-        }else{
-
-        }
         Node del = temp.next;
         System.out.println("node to delete : " + del.data);
         temp.next = temp.next.next;
         del.next = null;
+        size--;
     }
 
-    void printList(){{
-        Node temp = head;
-        while(temp != null){
-            System.out.println(temp.data);
-            temp = temp.next;
+    void printList(Node node){
+            while (node != null) {
+                System.out.println(node.data);
+                node = node.next;
+            }
         }
-    }
-        Node temp = head;
-        while(temp != null){
-            System.out.println(temp.data);
-            temp = temp.next;
-        }
-    }
 
+
+    void printReverse(Node n){
+        if(n == null) return;
+        printReverse(n.next);
+        System.out.println(n.data);
+    }
 
     public static void main(String[] args){
         LinkedListOperations linkedListOperations = new LinkedListOperations();
@@ -108,6 +94,6 @@ public class LinkedListOperations {
         linkedListOperations.insertAtPos(50, 3);
 //        linkedListOperations.printList();
         linkedListOperations.delete(4);
-        linkedListOperations.printList();
+        linkedListOperations.printList(linkedListOperations.head);
     }
 }

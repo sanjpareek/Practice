@@ -1,12 +1,14 @@
 package com.example.misc;
 
+import java.util.Scanner;
+
 /**
  * Created by sanjana on 26/6/17.
  */
 public class CalculateGCD {
     private int divisor;
     private int dividend;
-    void findGCD(int a, int b){
+    int findGCD(int a, int b){
         if(a>b){
             divisor = b;
             dividend = a;
@@ -16,14 +18,14 @@ public class CalculateGCD {
         }
         int remainder = dividend % divisor;
         if(remainder == 0){
-           System.out.print("GCD is  " +divisor);
-           return;
+           return divisor;
         }
-        findGCD(divisor , remainder);
+        return findGCD(divisor , remainder);
     }
 
     public static void main(String[] args){
         CalculateGCD calculateGCD = new CalculateGCD();
         calculateGCD.findGCD(180, 18);
+
     }
 }
