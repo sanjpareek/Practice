@@ -73,6 +73,7 @@ public class LinkedListOperations {
         for(int i = 0; i < position-2; i++){
             temp = temp.next;
         }
+
         Node del = temp.next;
         System.out.println("node to delete : " + del.data);
         temp.next = temp.next.next;
@@ -80,7 +81,13 @@ public class LinkedListOperations {
         size--;
     }
 
-    void printList(){
+    void printList(){{
+        Node temp = head;
+        while(temp != null){
+            System.out.println(temp.data);
+            temp = temp.next;
+        }
+    }
         Node temp = head;
         while(temp != null){
             System.out.println(temp.data);
