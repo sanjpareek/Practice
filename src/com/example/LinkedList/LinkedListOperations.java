@@ -84,7 +84,13 @@ public class LinkedListOperations {
         del.next = null;
     }
 
-    void printList(){
+    void printList(){{
+        Node temp = head;
+        while(temp != null){
+            System.out.println(temp.data);
+            temp = temp.next;
+        }
+    }
         Node temp = head;
         while(temp != null){
             System.out.println(temp.data);
