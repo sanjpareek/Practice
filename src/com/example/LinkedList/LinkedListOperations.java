@@ -85,6 +85,13 @@ public class LinkedListOperations {
         System.out.println(n.data);
     }
 
+    int getSize(Node node){
+        int size = 0;
+        while(node != null){
+            size++;
+        }
+        return size;
+    }
     public static void main(String[] args){
         LinkedListOperations linkedListOperations = new LinkedListOperations();
         linkedListOperations.insertAtHead(10);

@@ -6,6 +6,12 @@ package com.example.LinkedList;
 public class Reversal {
     LinkedListOperations list;
 
+    Reversal(LinkedListOperations list1){
+        list = list1;
+    }
+    Reversal(){
+        list = null;
+    }
     void reverseIteratively(){
         Node previous =  null;
         Node current = list.head;
