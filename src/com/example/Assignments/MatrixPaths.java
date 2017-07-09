@@ -5,9 +5,10 @@ package com.example.Assignments;
  */
 public class MatrixPaths {
     //Using bottom-up approach
+    //Since robot cannot traverse the same path twice, he can move only left and top
     private int numberOfPaths(int m, int n){
          if(m == 1 || n == 1){
-            //number of paths is 1 in last row and last column
+            //number of paths is 1 in first row and first column
             return 1;
         }
         return numberOfPaths(m-1, n) + numberOfPaths(m,n-1);
