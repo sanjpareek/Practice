@@ -32,4 +32,8 @@ public class KnapsackPOJO {
     public void setWeight(double weight) {
         this.weight = weight;
     }
+
+    public int getIndex() {
+        return index;
+    }
 }

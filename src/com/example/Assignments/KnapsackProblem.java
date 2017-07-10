@@ -1,6 +1,8 @@
 package com.example.Assignments;
 
 import java.io.*;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Created by sanjana on 10/7/17.
@@ -10,6 +12,7 @@ public class KnapsackProblem {
     double weight;
     double value;
     int index;
+    List indices;
     private void readFile(String filename) throws IOException {
         File file = new File(filename);
         BufferedReader br = new BufferedReader(new FileReader(file));
@@ -21,6 +24,7 @@ public class KnapsackProblem {
             if(options.length > 1){
                 int numberOfOptions = options.length;
                 knapsackPOJO = new KnapsackPOJO[numberOfOptions];
+                indices = new ArrayList();
                 for(int i=0; i<numberOfOptions; i++){
                     String properties[] = options[i].substring(1,options[i].length()-1).split(",");
                     weight = Double.parseDouble(properties[1]);
@@ -28,32 +32,40 @@ public class KnapsackProblem {
                     index = Integer.parseInt(properties[0]);
                     knapsackPOJO[i] = new KnapsackPOJO(index, value, weight);
                 }
-               double result =  chooseThings(knapsackPOJO, maxWeight, numberOfOptions-1);
+               KnapsackPOJO result =  chooseThings(knapsackPOJO, maxWeight, numberOfOptions-1);
                 System.out.println("Max value allowed : " + result);
             }
         }
     }
 
-    private double chooseThings(KnapsackPOJO[] knapsackPOJO, double maxWeight, int numberOfOptions ){
+    private KnapsackPOJO chooseThings(KnapsackPOJO[] knapsackPOJO, double maxWeight, int numberOfOptions ){
+
         if(knapsackPOJO[numberOfOptions].getWeight() == 0.0 || numberOfOptions == 0)
-            return 0;
+            return knapsackPOJO[numberOfOptions];
+
         if(knapsackPOJO[numberOfOptions].getWeight() > maxWeight){
             return chooseThings(knapsackPOJO, maxWeight, numberOfOptions-1);
                 }
-            return max(chooseThings(knapsackPOJO, maxWeight, numberOfOptions-1)
-                    ,knapsackPOJO[numberOfOptions].getValue()
-                            + chooseThings(knapsackPOJO,
-                            maxWeight- knapsackPOJO[numberOfOptions].getWeight()
-                          , numberOfOptions-1));
+
+
+               return max(chooseThings(knapsackPOJO, maxWeight, numberOfOptions-1),
+                        chooseThings(knapsackPOJO,
+                                maxWeight- knapsackPOJO[numberOfOptions].getWeight()
+                                , numberOfOptions-1)
+                        );
+
     }
 
-    private double max(double a, double b){
-        return a > b ? a : b;
+    private KnapsackPOJO max(KnapsackPOJO p1, KnapsackPOJO p2){
+        KnapsackPOJO k = p1.getValue() > p2.getValue() ? p1 : p2;
+        indices.add(k.getIndex());
+        return k;
     }
 
     public static void main(String[] args) throws IOException {
         String fileName = "src/com/example/Assignments/sampleFile.txt";
         KnapsackProblem knapsackProblem = new KnapsackProblem();
         knapsackProblem.readFile(fileName);
+        System.out.print(knapsackProblem.indices);
     }
 }
