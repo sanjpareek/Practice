@@ -8,9 +8,9 @@ public class RecursionStateCheck {
         if(value == 0)
             return;
         int valueHere = value;
-        callMe(value-1);
         System.out.println("value : " + value );
-        System.out.println("valueHere : " + valueHere);
+        callMe(value-1);
+        System.out.println("valueHere : " + valueHere); //this line will be executed when the stack is popped
 
     }
 
