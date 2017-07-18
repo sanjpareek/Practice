@@ -1,9 +1,14 @@
 package com.example.BST;
 
+import org.omg.Messaging.SYNC_WITH_TRANSPORT;
+
+import java.util.LinkedList;
+import java.util.Queue;
+
 /**
  * Created by sanjana on 17/7/17.
  *
- * insert, delete, count nodes, search, inorder, preorder, postorder, isBST
+ * insert, delete, count nodes, search, inorder, preorder, postorder, isBST, print level-wise
  */
 public class BSTOperations {
     private BSTNode root;
@@ -56,6 +61,83 @@ public class BSTOperations {
             if(node.right == null) return node;
             else return min(node.right);
         }
+
+        public int findHeight(BSTNode root){
+            if(root == null) return 0;
+            else {
+                return maxVal(findHeight(root.left),findHeight(root.right) + 1);
+            }
+        }
+
+        public int maxVal(int a, int b){
+            return a>b?a:b;
+        }
+
+        public void preOrderTraversal(BSTNode root){
+            if(root == null) return;
+            else
+                System.out.println(root.data);
+            preOrderTraversal(root.left);
+            preOrderTraversal(root.right);
+        }
+
+        public void inOrderTraversal(BSTNode root){
+            if(root == null) return;
+            inOrderTraversal(root.left);
+            System.out.println(root.data);
+            inOrderTraversal(root.right);
+        }
+
+    public void postOrderTraversal(BSTNode root){
+        if(root == null) return;
+        postOrderTraversal(root.left);
+        postOrderTraversal(root.right);
+        System.out.println(root.data);
+    }
+
+        public void printLevelOrder(BSTNode root){
+            if(root == null) return;
+            Queue<BSTNode> queue = new LinkedList<>();
+            queue.add(root);
+            while(!queue.isEmpty()){
+                BSTNode temp = queue.poll();
+                System.out.println(temp.data);
+                if(temp.left!= null)
+                    queue.add(temp.left);
+                if(temp.right!= null)
+                    queue.add(temp.right);
+            }
+        }
+
+        public void printLevelWise(BSTNode root){
+            if(root == null) return;
+            Queue<BSTNode> queue = new LinkedList<>();
+            queue.add(root);
+            while(!queue.isEmpty()){
+                int size = queue.size();
+                while(size > 0){
+                    BSTNode temp = queue.poll();
+                    System.out.print(temp.data + " ");
+                    size--;
+                    if(temp.left!= null)
+                        queue.add(temp.left);
+                    if(temp.right!= null)
+                        queue.add(temp.right);
+                }
+                System.out.println();
+            }
+        }
+
+        public void isBST(BSTNode root){
+           System.out.print(isBSTUtil(root, 1000, 2000));
+        }
+
+        public boolean isBSTUtil(BSTNode root, int min, int max){
+            if(root == null) return true;
+            if(root.data > max || root.data < min) return false;
+            return isBSTUtil(root.left, min, root.data-1) && isBSTUtil(root.right, root.data+1 , max);
+        }
+
         /*
         1. root is null -> return
         2. leaf node ->
@@ -100,7 +182,11 @@ public class BSTOperations {
         root = operations.insert(root, 22);
         root = operations.insert(root, 4);
         root = operations.insert(root, 12);
+        root = operations.insert(root, 30);
+        root = operations.insert(root, 11);
+        root = operations.insert(root, 11);
 
-        System.out.print(operations.delete(root, 20).data);
+//        operations.printLevelWise(root);
+        operations.isBST(root);
     }
 }
