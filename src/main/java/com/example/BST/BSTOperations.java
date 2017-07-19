@@ -97,7 +97,7 @@ public class BSTOperations {
 
         public void printLevelOrder(BSTNode root){
             if(root == null) return;
-            Queue<BSTNode> queue = new LinkedList<>();
+            Queue<BSTNode> queue = new LinkedList<BSTNode>();
             queue.add(root);
             while(!queue.isEmpty()){
                 BSTNode temp = queue.poll();
@@ -111,7 +111,7 @@ public class BSTOperations {
 
         public void printLevelWise(BSTNode root){
             if(root == null) return;
-            Queue<BSTNode> queue = new LinkedList<>();
+            Queue<BSTNode> queue = new LinkedList<BSTNode>();
             queue.add(root);
             while(!queue.isEmpty()){
                 int size = queue.size();
@@ -175,6 +175,19 @@ public class BSTOperations {
             return root;
         }
 
+        public BSTNode getInorderSucc(BSTNode node){
+            if (node == null) return null;
+            if(node.right == null) return  null;
+            node = node.right;
+            if(node.left != null){
+                BSTNode temp = node;
+                while(temp.left!= null)
+                    temp = temp.left;
+                return temp;
+            }else
+                return node;
+        }
+
     public static void main(String[] args){
         BSTOperations operations = new BSTOperations();
         BSTNode root = new BSTNode(20);
@@ -184,9 +197,16 @@ public class BSTOperations {
         root = operations.insert(root, 12);
         root = operations.insert(root, 30);
         root = operations.insert(root, 11);
-        root = operations.insert(root, 11);
+        BSTNode node = new BSTNode(8);
 
 //        operations.printLevelWise(root);
-        operations.isBST(root);
+//        operations.isBST(root);
+        BSTNode a = operations.getInorderSucc(root.right);
+        if( a != null){
+            System.out.print(a.data);
+        }else{
+            System.out.print("Leaf node has no successors");
+        }
+
     }
 }

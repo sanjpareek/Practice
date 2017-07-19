@@ -1,4 +1,4 @@
-package com.example.Assignments;
+package com.example.Assignments.DynamicProg;
 
 import java.io.*;
 import java.util.ArrayList;

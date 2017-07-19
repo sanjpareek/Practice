@@ -12,7 +12,7 @@ public class FindingPairs {
 
     private int findPairs(int a[], int sum){
         int pairs = 0;
-        HashMap<Integer, Integer> map = new HashMap<>();
+        HashMap<Integer, Integer> map = new HashMap<Integer, Integer>();
         for(int i=0; i<a.length;i++){
                 map.put(a[i],0);
         }

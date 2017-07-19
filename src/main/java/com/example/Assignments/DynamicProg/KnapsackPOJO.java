@@ -1,4 +1,4 @@
-package com.example.Assignments;
+package com.example.Assignments.DynamicProg;
 
 /**
  * Created by sanjana on 10/7/17.
