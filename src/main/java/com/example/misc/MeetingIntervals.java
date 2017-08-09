@@ -54,7 +54,6 @@ public class MeetingIntervals implements Comparable<MeetingIntervals>{
                 merged.get(size-1).endTime = sorted.get(i).endTime;
             }
         }
-
         return merged;
     }
 // 1, 3    1,  5
@@ -67,11 +66,7 @@ public class MeetingIntervals implements Comparable<MeetingIntervals>{
         }
 
         Collections.sort(meetings);
-
-
-
         List<MeetingIntervals> result = merge(meetings);
-
         for(int i =0; i<result.size(); i++){
             System.out.println(result.get(i).startTime + " " + result.get(i).endTime);
         }
